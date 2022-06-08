@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Footer from './Components/Footer/Footer';
+import Header from './Components/Header/Header';
+import { Outlet, useLocation } from 'react-router-dom';
 
-function App() {
+
+const App = () => {
+
+  const location = useLocation();
+  let pathnameClass = location.pathname.replace('/', '');
+  pathnameClass = (pathnameClass.includes('/')) ? pathnameClass.replace(/\//g, '-') : pathnameClass;
+  pathnameClass = (pathnameClass === "") ? "home" : pathnameClass;
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`app ${pathnameClass}`}>
+      <Header>
+      </Header>
+      <div className='container body'>
+        <Outlet />
+      </div>
+      <Footer>
+        <nav>
+
+        </nav>
+      </Footer>
     </div>
   );
 }
