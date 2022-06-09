@@ -1,10 +1,10 @@
-import APITest from "../Components/APITest/APITest";
+import PostsList from "../Components/PostsList/PostsList";
 
 const Home = () => {
 
   return (
     <div>
-      <APITest/>
+      <PostsList/>
     </div>
     );
   }

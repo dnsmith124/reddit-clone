@@ -1,4 +1,4 @@
-import './App.css';
+import styles from './App.module.css';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -12,10 +12,10 @@ const App = () => {
   pathnameClass = (pathnameClass === "") ? "home" : pathnameClass;
   
   return (
-    <div className={`app ${pathnameClass}`}>
+    <div className={`${styles.app} ${pathnameClass}`}>
       <Header>
       </Header>
-      <div className='container body'>
+      <div className={`${styles.container} body`}>
         <Outlet />
       </div>
       <Footer>

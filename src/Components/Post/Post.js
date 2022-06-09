@@ -1,3 +1,4 @@
+import styles from './Post.module.css';
 import { useParams } from "react-router-dom";
 import { currentPosts } from "../../Redux/postsSlice";
 import { useSelector } from "react-redux";
@@ -23,11 +24,10 @@ const Post = ({data}) => {
   console.log(post)
 
   return (
-    <div>
+    <div className={styles.post}>
       <h2 className='post-title h5'>
         {post.title}
       </h2>
-      
     </div>
   )
 };

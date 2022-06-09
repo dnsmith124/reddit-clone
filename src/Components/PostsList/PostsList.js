@@ -1,9 +1,10 @@
+import styles from './PostsList.module.css';
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { setCurrentPosts, currentPosts } from "../../Redux/postsSlice";
 import { useSelector, useDispatch } from "react-redux";
+import PostPreview from '../PostPreview/PostPreview';
 
-const APITest = () => {
+const PostsList = () => {
 
   let persistedPosts = useSelector(currentPosts);
   const [posts, setPosts] = useState(persistedPosts);
@@ -29,10 +30,11 @@ const APITest = () => {
 
           let formattedPosts = formatPosts(data.data.children);
           setPosts(formattedPosts);
+          setRefresh(false);
         });
       }
     )
-  }, [subreddit, refresh]);
+  }, [subreddit, refresh, persistedPosts]);
 
   useEffect(() => {
     if(posts.length <= 0)
@@ -53,18 +55,17 @@ const APITest = () => {
 
     return posts.map( (element, i) => { 
       return (
-        <Link to={`posts/${element.name}`} key={i}>
-          <h2>
-            {element.title}
-          </h2>
-        </Link>
+        <PostPreview post={element} key={i} />
       )
     })
   }
 
   return (
-    <div>
+    <div className={styles.postsList}>
       <button className="refresh" onClick={()=> setRefresh(!refresh)}>Refresh</button>
+      <button className="refresh" onClick={()=> {setRefresh(true); setSubreddit('all')}}>All</button>
+      <button className="refresh" onClick={()=> {setRefresh(true); setSubreddit('games')}}>Games</button>
+      <button className="refresh" onClick={()=> {setRefresh(true); setSubreddit('askhistorians')}}>AskHistorians</button>
       {
         displayPosts(posts)
       }
@@ -72,4 +73,4 @@ const APITest = () => {
   )
 };
 
-export default APITest;
+export default PostsList;
